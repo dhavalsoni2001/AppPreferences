@@ -1,0 +1,16 @@
+{
+  "name": "AppPreferences",
+  "version": "1.0.0",
+  "description": "This version supports Cordova 3.x.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhavalsoni2001/AppPreferences.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dhavalsoni2001/AppPreferences/issues"
+  },
+  "homepage": "https://github.com/dhavalsoni2001/AppPreferences#readme"
+}
