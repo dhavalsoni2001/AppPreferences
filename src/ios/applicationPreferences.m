@@ -36,16 +36,18 @@
 					@throw [NSException exceptionWithName:nil reason:@"Key not found" userInfo:nil];;
 			}
 			result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:returnVar];
-			jsString = [result toSuccessCallbackString:callbackID];		
+            jsString = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 		}
 		@catch (NSException * e) 
 		{
 			result = [CDVPluginResult resultWithStatus:CDVCommandStatus_NO_RESULT messageAsString:[e reason]];
-            jsString = [result toErrorCallbackString:callbackID];
+            jsString = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
 		}
 		@finally 
 		{
-			[self writeJavascript:jsString]; //Write back to JS
+            [self.commandDelegate sendPluginResult:result callbackId:jsString];
+
+			//[self writeJavascript:jsString]; //Write back to JS
 		}
 }
 
@@ -64,17 +66,17 @@
     {
         [[NSUserDefaults standardUserDefaults] setValue:settingsValue forKey:settingsName];
         result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-        jsString = [result toSuccessCallbackString:callbackID];
+        jsString = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 			
     }
     @catch (NSException * e) 
     {
         result = [CDVPluginResult resultWithStatus:CDVCommandStatus_NO_RESULT messageAsString:[e reason]];
-        jsString = [result toErrorCallbackString:callbackID];
+        jsString = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     }
     @finally 
     {
-        [self writeJavascript:jsString]; //Write back to JS
+        [self.commandDelegate sendPluginResult:result callbackId:jsString]; //Write back to JS
     }
 }
 /*
